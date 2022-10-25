@@ -1,8 +1,6 @@
 import api from "./api";
 import * as express from "express";
-import * as AWS from 'aws-sdk';
 import * as cors from 'cors';
-import * as QueryString from 'qs';
 
 console.info("Starting server...");
 
