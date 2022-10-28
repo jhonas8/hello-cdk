@@ -2,14 +2,14 @@ import { APIGatewayProxyHandler } from 'aws-lambda';
 
 export const handler: APIGatewayProxyHandler = async (event, context) => {
     try {
-        console.log("request event", JSON.stringify(event));
+        console.log('request event', JSON.stringify(event));
         return {
             statusCode: 200,
             headers: {
                 'Content-Type': 'text/html',
                 'Access-Control-Allow-Origin': '*',
             },
-            body: "First API",
+            body: 'First API',
         };
     } catch (e) {
         return {
@@ -21,5 +21,4 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
             body: JSON.stringify(e),
         };
     }
-}
-
+};
