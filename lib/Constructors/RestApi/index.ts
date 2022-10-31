@@ -5,12 +5,18 @@ import {
     Cors,
 } from 'aws-cdk-lib/aws-apigateway';
 import { ResourceHello } from './Resources/Hello';
+import { ResourceSimple } from './Resources/Simple';
+import { DynamoConstruct } from '../Dynamo';
+
+type Props = {
+    dynamo: DynamoConstruct;
+};
 
 export class RestApi extends Construct {
     public readonly restApi: CDKRestApi;
     public readonly apiV1: Resource;
 
-    constructor(scope: Construct, id: string) {
+    constructor(scope: Construct, id: string, props: Props) {
         super(scope, id);
 
         this.restApi = new CDKRestApi(scope, 'VH-Gateway-Api', {
@@ -27,6 +33,11 @@ export class RestApi extends Construct {
         // and attaching HTTP's methods to it.
         new ResourceHello(scope, 'VH-Gateway-Api-Resource-Hello', {
             restApi: this.apiV1,
+        });
+
+        new ResourceSimple(scope, 'VH-Gateway-Api-Resource-Simple', {
+            restApi: this.apiV1,
+            table: props.dynamo.table,
         });
     }
 }

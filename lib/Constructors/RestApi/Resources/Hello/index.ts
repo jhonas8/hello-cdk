@@ -1,6 +1,6 @@
 import { Construct } from 'constructs';
 import { Resource, LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
-import { HelloCdkConstruct } from '../../../Lambda/Endpoints/hello';
+import { HelloLambda } from '../../../Lambda/Endpoints/hello';
 
 type Props = {
     restApi: Resource;
@@ -16,7 +16,7 @@ export class ResourceHello extends Construct {
         // This construct implements the handler to be called
         // as a Lambda function to the endpoint /v1/hello.
         // The handler is defined in the file src/endpoints/hello/index.ts
-        const HelloCdk = new HelloCdkConstruct(scope, 'Hello-Lambda');
+        const HelloCdk = new HelloLambda(scope, 'Hello-Lambda');
 
         const resource = props.restApi.addResource('hello'); //Adding the endpoint /hello to the passed path. In this case, it's /v1/hello
 
